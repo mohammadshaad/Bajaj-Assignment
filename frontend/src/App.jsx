@@ -51,24 +51,47 @@ function App() {
 
     return (
       <div className="results-container">
-        {selectedOptions.includes('numbers') && numbers.length > 0 && (
-          <div className="result-item">
-            <h3 className="result-title">Numbers</h3>
-            <pre className="result-content">{JSON.stringify(numbers, null, 2)}</pre>
-          </div>
-        )}
-        {selectedOptions.includes('alphabets') && alphabets.length > 0 && (
-          <div className="result-item">
-            <h3 className="result-title">Alphabets</h3>
-            <pre className="result-content">{JSON.stringify(alphabets, null, 2)}</pre>
-          </div>
-        )}
-        {selectedOptions.includes('highestLowercaseAlphabet') && highest_lowercase_alphabet.length > 0 && (
-          <div className="result-item">
-            <h3 className="result-title">Highest Lowercase Alphabet</h3>
-            <pre className="result-content">{JSON.stringify(highest_lowercase_alphabet, null, 2)}</pre>
-          </div>
-        )}
+        {selectedOptions.includes('numbers') ? (
+          numbers.length > 0 ? (
+            <div className="result-item">
+              <h3 className="result-title">Numbers</h3>
+              <pre className="result-content">{JSON.stringify(numbers, null, 2)}</pre>
+            </div>
+          ) : (
+            <div className="result-item">
+              <h3 className="result-title">Numbers</h3>
+              <p className="result-content">No numbers found.</p>
+            </div>
+          )
+        ) : null}
+        
+        {selectedOptions.includes('alphabets') ? (
+          alphabets.length > 0 ? (
+            <div className="result-item">
+              <h3 className="result-title">Alphabets</h3>
+              <pre className="result-content">{JSON.stringify(alphabets, null, 2)}</pre>
+            </div>
+          ) : (
+            <div className="result-item">
+              <h3 className="result-title">Alphabets</h3>
+              <p className="result-content">No alphabets found.</p>
+            </div>
+          )
+        ) : null}
+
+        {selectedOptions.includes('highestLowercaseAlphabet') ? (
+          highest_lowercase_alphabet.length > 0 ? (
+            <div className="result-item">
+              <h3 className="result-title">Highest Lowercase Alphabet</h3>
+              <pre className="result-content">{JSON.stringify(highest_lowercase_alphabet, null, 2)}</pre>
+            </div>
+          ) : (
+            <div className="result-item">
+              <h3 className="result-title">Highest Lowercase Alphabet</h3>
+              <p className="result-content">No highest lowercase alphabet found.</p>
+            </div>
+          )
+        ) : null}
       </div>
     );
   };
