@@ -88,3 +88,34 @@ p {
   font-size: 1rem;
   margin-top: 10px;
 }
+
+.results-container {
+  margin-top: 20px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.result-item {
+  margin-bottom: 15px;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #fff;
+}
+
+.result-title {
+  font-size: 1.25rem;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.result-content {
+  font-family: monospace;
+  background-color: #f0f0f0;
+  padding: 10px;
+  border-radius: 4px;
+  overflow-x: auto;
+  white-space: pre-wrap;
+}
