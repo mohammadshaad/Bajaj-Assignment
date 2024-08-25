@@ -1,36 +1,3 @@
-// // src/App.jsx
-// import React, { useState } from 'react';
-// import InputField from './components/InputField';
-// import ResultDisplay from './components/ResultDisplay';
-
-// const App = () => {
-//   const [result, setResult] = useState(null);
-
-//   const handleSubmit = async (data) => {
-//     try {
-//       const response = await fetch('/bfhl', {
-//         method: 'POST',
-//         headers: { 'Content-Type': 'application/json' },
-//         body: JSON.stringify({ data }),
-//       });
-//       const result = await response.json();
-//       setResult(result);
-//     } catch (e) {
-//       console.error('Error:', e);
-//     }
-//   };
-
-//   return (
-//     <div>
-//       <h1>Bajaj Finserv Health Challenge</h1>
-//       <InputField onSubmit={handleSubmit} />
-//       <ResultDisplay result={result} />
-//     </div>
-//   );
-// };
-
-// export default App;
-
 import { useState } from 'react';
 import './App.css';
 
@@ -44,22 +11,27 @@ function App() {
     e.preventDefault();
     setError(null);
     setResponse(null);
-
+  
     try {
       const data = JSON.parse(jsonInput);
       const res = await fetch('https://shaad-bajaj-finserv-backend.vercel.app/bfhl', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ data }),
+        body: JSON.stringify(data), // Directly send the JSON object
       });
-
+  
+      if (!res.ok) {
+        throw new Error(`Network response was not ok: ${res.statusText}`);
+      }
+  
       const result = await res.json();
-      console.log('API Response:', result); // Add this line for debugging
+      console.log('API Response:', result);
       setResponse(result);
     } catch (err) {
-      setError('Invalid JSON');
+      setError(`Error: ${err.message}`);
+      console.error('Error:', err);
     }
-  };
+  };  
 
   const handleOptionChange = (e) => {
     const value = e.target.value;
@@ -77,19 +49,19 @@ function App() {
 
     return (
       <div>
-        {selectedOptions.includes('Numbers') && (
+        {selectedOptions.includes('Numbers') && numbers.length > 0 && (
           <div>
             <h3>Numbers</h3>
             <pre>{JSON.stringify(numbers, null, 2)}</pre>
           </div>
         )}
-        {selectedOptions.includes('Alphabets') && (
+        {selectedOptions.includes('Alphabets') && alphabets.length > 0 && (
           <div>
             <h3>Alphabets</h3>
             <pre>{JSON.stringify(alphabets, null, 2)}</pre>
           </div>
         )}
-        {selectedOptions.includes('Highest lowercase alphabet') && (
+        {selectedOptions.includes('Highest lowercase alphabet') && highest_lowercase_alphabet.length > 0 && (
           <div>
             <h3>Highest Lowercase Alphabet</h3>
             <pre>{JSON.stringify(highest_lowercase_alphabet, null, 2)}</pre>
@@ -102,10 +74,9 @@ function App() {
   return (
     <div className="App">
       <h1>BFHL Frontend</h1>
-      <h2>Made with ❤️ by 
+      <h2>Made with ❤️ by
         {" "}
         <a href="https://github.com/mohammadshaad" target="_blank" rel="noreferrer">
-          
           <strong>Shaad</strong>
         </a>
       </h2>
@@ -113,7 +84,7 @@ function App() {
         <textarea
           value={jsonInput}
           onChange={(e) => setJsonInput(e.target.value)}
-          placeholder='{"data": ["A","C","z"]}'
+          placeholder='["A","C","Z","c","i"]' // Remove the outer JSON object
           rows="10"
           cols="50"
         />
