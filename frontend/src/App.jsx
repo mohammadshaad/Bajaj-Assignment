@@ -47,13 +47,14 @@ function App() {
 
     try {
       const data = JSON.parse(jsonInput);
-      const res = await fetch('http://localhost:8080/bfhl', {
+      const res = await fetch('https://shaad-bajaj-finserv-backend.vercel.app/bfhl', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ data }),
-      });      
+      });
 
       const result = await res.json();
+      console.log('API Response:', result); // Add this line for debugging
       setResponse(result);
     } catch (err) {
       setError('Invalid JSON');
