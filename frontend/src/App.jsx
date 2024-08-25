@@ -102,6 +102,13 @@ function App() {
   return (
     <div className="App">
       <h1>BFHL Frontend</h1>
+      <h2>Made with ❤️ by 
+        {" "}
+        <a href="https://github.com/mohammadshaad" target="_blank" rel="noreferrer">
+          
+          <strong>Shaad</strong>
+        </a>
+      </h2>
       <form onSubmit={handleSubmit}>
         <textarea
           value={jsonInput}
